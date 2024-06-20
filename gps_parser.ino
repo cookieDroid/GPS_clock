@@ -510,12 +510,20 @@ void send_message()
     uint8_t minutes_message[] = {0x5a, 0xa5, 0x05, 0x82, 0x21, 0x06, 0x00, (uint8_t)display_minute};
     uint8_t seconds_message[] = {0x5a, 0xa5, 0x05, 0x82, 0x21, 0x0a, 0x00, (uint8_t)display_seconds};
     // uint8_t page_change[] = {0x5a, 0xa5, 0x07, 0x82, 0x00, 0x84, 0x5a, 0x01, 0x00, 0x00};
-
+    uint8_t gnss_message[] = {0x5a, 0xa5, 0x05, 0x82, 0x21, 0x0f, 0x00, (uint8_t)data.gps_data.sat_GPS};
+    uint8_t gal_message[] = {0x5a, 0xa5, 0x05, 0x82, 0x21, 0x14, 0x00, (uint8_t)data.gps_data.sat_GLONASS};
+    uint8_t beidou_message[] = {0x5a, 0xa5, 0x05, 0x82, 0x21, 0x18, 0x00, (uint8_t)data.gps_data.sat_BEIDOU};
     Serial1.write(hours_message, LENGTH_OF_ARRAY(hours_message));
     delay(5);
     Serial1.write(minutes_message, LENGTH_OF_ARRAY(minutes_message));
     delay(5);
     Serial1.write(seconds_message, LENGTH_OF_ARRAY(seconds_message));
+    delay(5);
+    Serial1.write(gnss_message, LENGTH_OF_ARRAY(gnss_message));
+    delay(5);
+    Serial1.write(gal_message, LENGTH_OF_ARRAY(gal_message));
+    delay(5);
+    Serial1.write(beidou_message, LENGTH_OF_ARRAY(beidou_message));
     delay(5);
     process_hour(data.hours);
     char day_details[50];
